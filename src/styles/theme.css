@@ -37,3 +37,6 @@ a {
 a:hover {
   @apply underline;
 }
+
+@media (prefers-color-scheme: dark) {
+}
