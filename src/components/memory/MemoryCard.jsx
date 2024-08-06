@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import styles from "./MemoryCard.module.css";
 import { CARD_STATE } from "../../lib/memory";
+import { useTheme } from "../../context/ThemeProvider";
 
 export const MemoryCard = ({ children, card, onClick }) => {
   const isReturned =
     card.state === CARD_STATE.RETURNED || card.state === CARD_STATE.FIND;
 
   return (
-    <div className="relative" onClick={() => onClick?.()}>
+    <div className="relative" onClick={onClick}>
       <button
         className={clsx(
           styles.transition,
@@ -19,7 +20,7 @@ export const MemoryCard = ({ children, card, onClick }) => {
           }
         )}
       >
-        <span className="bg-paper p-3 block rounded">{children}</span>
+        <span className="block p-3 rounded bg-paper">{children}</span>
       </button>
       <button
         style={{ backfaceVisibility: "hidden" }}
@@ -31,8 +32,13 @@ export const MemoryCard = ({ children, card, onClick }) => {
           }
         )}
       >
-        ❓{/* Memory Game - Exercise */}
+        <QuestionEmoji />
       </button>
     </div>
   );
+};
+
+const QuestionEmoji = () => {
+  const { isLight } = useTheme();
+  return isLight ? "❓" : "❔";
 };
