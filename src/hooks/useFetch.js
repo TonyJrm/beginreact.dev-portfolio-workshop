@@ -54,5 +54,14 @@ export const useFetch = (url, config) => {
     run();
   }, [run]);
 
-  return { status, data, error, run };
+  return {
+    status,
+    data,
+    error,
+    run,
+    isLoading: status === "pending",
+    isIdle: status === "idle",
+    isResolved: status === "resolved",
+    isRejected: status === "rejected",
+  };
 };
